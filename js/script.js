@@ -1,33 +1,34 @@
 $(document).ready(function(){
+    
+    if (Modernizr.backgroundcliptext) {
+        window.alert("Supported");
+    } 
+    else {
+        $(".portfolio, .languages-text, .software-text, .education-highlight, .education-bold, .portfolio-highlight, .highlighted-blue-text, highlighted-blue").removeClass("yellow-gradient-text");
+        $(".skills-text, .portfolio-text").removeClass("red-gradient-text");
+        $(".portfolio, .skills-text, .portfolio-text, .languages-text, .software-text, .portfolio-highlight").addClass("red-text");
+
+        $(".about, .education-text, .contact-text, highlighted-blue-text").removeClass("blue-gradient-text");
+        $(".about, .education-text, .contact-text, .highlighted-blue-text, .education-highlight, .education-bold").addClass("blue-text");
+        
+      window.alert("Not Supported");
+    }
+    
+    
     SetImageText();
     
-    // Get the modal
-    var modal = $("#overlay");
+    //modal
+        $("#menu").click(function(){
+        $('#modal-container').removeAttr('class').addClass("active");
+        $('body').addClass('modal-active');
+    })
 
-    // Get the button that opens the modal
-    var btn = $("#menu");
-
-    // Get the span element that closes the modal
-    var span = $("#close");
-
-    // When the user clicks on the button, open the modal 
-    btn.click(function(){
-        modal.css( "display", "block" );
-        btn.css( "display", "none" );
-    });
-
-    // When the user clicks on x, close the modal
-    span.click(function(){
-        modal.css( "display", "none" );
-        btn.css( "display", "inline" );
+    $('#modal-container').click(function(){
+        $(this).addClass('out');
+        $('body').removeClass('modal-active');
     });
     
-    // When the user clicks on an anchor in the menu, close the modal 
-    $("ul#menu-items a").click(function(){
-        modal.css( "display", "none" );
-        btn.css( "display", "inline" );
-      });
-
+    
     // When the user clicks on the next navigation icon in the image gallery
     $(".iis-next-nav").click(function(){
         SetImageText();
@@ -52,7 +53,16 @@ $(document).ready(function(){
             attributes: true
         });
     });
-        
+    
+    // Animate the skillbar percentage shown
+    $('.skillbar').each(function(){
+		$(this).find('.skillbar-bar').animate({
+			width:jQuery(this).attr('data-percent')
+		},6000);
+	});
+    
+
+
 // Document.Ready closing tags    
 });
 
